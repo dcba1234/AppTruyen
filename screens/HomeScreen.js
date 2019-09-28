@@ -103,7 +103,7 @@ class Home extends React.Component {
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
         <View>
-          {data.map((item) =>
+          {data.map((item) =>    // cái này chắc k cần gt nhể =>>
             <View>
               <Text>
                 {item.Name}
