@@ -12,6 +12,8 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@ant-design/icons-react-native": "^1.0.2",
+    "@ant-design/react-native": "^3.1.15",
     "@expo/samples": "~3.0.3",
     "@expo/vector-icons": "^10.0.3",
     "@react-navigation/web": "^1.0.0-alpha.9",
@@ -20,6 +22,7 @@
     "expo-constants": "^7.0.0",
     "expo-font": "^7.0.0",
     "expo-web-browser": "^7.0.0",
+    "moment": "^2.24.0",
     "react": "16.8.3",
     "react-dom": "16.8.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
