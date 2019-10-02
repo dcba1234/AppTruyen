@@ -18,7 +18,7 @@ import { MonoText } from '../components/StyledText';
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-
+      
       <Home />
     </View>
   );
@@ -54,6 +54,16 @@ class Home extends React.Component {
           Continue: false,
           chapNumber: 10
         },
+        {
+          Id: 3, Name: 'Võ lâm truyền kỳ',
+          View: 10, Hot: false,
+          ImgUrl: 'https://tienthanh217.000webhostapp.com/AppTruyen/yeu-than-ky.jpg',
+          Type: 'Truyện kiếm hiệp',
+          Author: 'Tiến Tiến',
+          DateModify: '1/1/2001',
+          Continue: true,
+          chapNumber: 10
+        },
       ],// Ví dụ về 1 sách
     }
   }
@@ -75,7 +85,12 @@ class Home extends React.Component {
   render() {
     const data = this.state ? this.state.listNovel : [];
     return (<>
-
+      {/* <Slideshow 
+      dataSource={[
+        { url:'https://tienthanh217.000webhostapp.com/AppTruyen/yeu-than-ky.jpg' },
+        { url:'https://tienthanh217.000webhostapp.com/AppTruyen/yeu-than-ky.jpg' },
+        { url:'https://tienthanh217.000webhostapp.com/AppTruyen/yeu-than-ky.jpg' }
+    ]}/> */}
       <View style={styles.welcomeContainer}>
         <Image
           source={
@@ -86,31 +101,32 @@ class Home extends React.Component {
           style={styles.welcomeImage}
         />
       </View>
-      <View>
-        <Button style={{ width: 120 }}> Hêl9 </Button>
-      </View>
+    
       <Image
-        style={{ width: 50, height: 50 }}
-        source={{ uri: 'https://tienthanh217.000webhostapp.com/AppTruyen/yeu-than-ky.jpg' }}></Image>
+        style={{ width: 450, height: 200 }}
+        source={{ uri: 'http://www.nhahocotton.org.vn/wp-content/uploads/2018/04/thu-kiem-truong-an.jpg'}}>
+        
+      </Image>
 
       <View>
-        <Text>
+        {/* <Text>
           {data.length}
-        </Text>
+        </Text> */}
       </View>
-
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
         <View>
           {data.map((item) =>    // cái này chắc k cần gt nhể =>>
-            <View>
-              <Text>
+            <View style={{flexDirection: "row"}}>
+              
+              <Image
+                style={{ width: 200, height: 200, margin: 5 }}
+                source={{ uri: item.ImgUrl}}></Image>
+                <Text>
                 {item.Name}
               </Text>
-              <Image
-                style={{ width: 50, height: 50 }}
-                source={{ uri: item.ImgUrl}}></Image>
+              
             </View>)}
         </View>
       </ScrollView>
