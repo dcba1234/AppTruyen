@@ -9,12 +9,9 @@ import {
   View
 } from "react-native";
 import { red } from "ansi-colors";
-export class NovelDetailComp extends React.Component {
+export class NovelPartialComp extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isReady: false
-    };
   }
   async componentDidMount() {}
   render() {
@@ -29,20 +26,12 @@ export class NovelDetailComp extends React.Component {
             ></Image>
           </View>
           <View style={styles.right}>
-            <Text style={{}}>{this.props.item.Name}</Text>
-            <Text style={{ color: "#b3b3b3", fontSize: 12 }}>
+            <Text numberOfLines={1} style={{}}>
+              {this.props.item.Name}
+            </Text>
+            <Text numberOfLines={1} style={{ color: "#b3b3b3", fontSize: 12 }}>
               {this.props.item.Author}
             </Text>
-            <Text numberOfLines={2} style={{ fontSize: 12 }}>
-              {this.props.item.Summary}
-            </Text>
-            <View style={styles.statusBox}>
-              <Text
-                style={{ alignSelf: "center", color: "#2ae8bf", fontSize: 12 }}
-              >
-                {this.props.item.Continue === "1" ? "Đang ra" : "Full"}
-              </Text>
-            </View>
           </View>
         </View>
       </TouchableOpacity>
@@ -52,15 +41,14 @@ export class NovelDetailComp extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
+    width: 70,
     marginTop: 10
   },
   left: {
     width: "20%"
   },
   right: {
-    width: "70%",
-    marginLeft: 10
+    width: "100%"
   },
   statusBox: {
     justifyContent: "center",

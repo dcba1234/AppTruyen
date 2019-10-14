@@ -3,6 +3,7 @@ import { AppLoading } from "expo";
 import * as Font from "expo-font";
 import { Button } from "@ant-design/react-native";
 import { NovelDetailComp } from "./Component/NovelFull.js";
+import { NovelPartialComp } from "./Component/NovelPartial.js";
 import React from "react";
 import { NovelService } from "./Service/NovelService.js";
 import {
@@ -13,11 +14,12 @@ import {
   Text,
   TouchableOpacity,
   View,
-  RefreshControl
+  RefreshControl,
+  StatusBar
 } from "react-native";
 import styles from "../Css/HomeScreen";
 import { MonoText } from "../components/StyledText";
-
+const lodash = require('lodash')
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
@@ -37,7 +39,6 @@ class Home extends React.Component {
       isReady: false,
       listNovel: [] // cái này xem trong log để xem kiểu dữ liệu
     };
-
   }
 
   async componentDidMount() {
@@ -51,38 +52,56 @@ class Home extends React.Component {
     );
 
     let list = await NovelService.getAll();
-    this.setState({ isReady: true, listNovel: list });
     console.log(list);
+    let json = require('./Local.json');
+    if(list.length == 0 ) list = json 
+    this.setState({ isReady: true, listNovel: list });
+    
   }
 
-  reLoad = async() => {
-    this.setState({isReady:false})
+  reLoad = async () => {
+    this.setState({ isReady: false });
     let list = await NovelService.getAll();
-    this.setState({isReady:true,listNovel: list})
-  }
+    this.setState({ isReady: true, listNovel: list });
+  };
 
   render() {
-
     const data = this.state ? this.state.listNovel : [];
+    const dataHot = this.state.listNovel.filter(item => item.Hot === "1");
     return (
-      <>
+      <View style={{height:'100%'}}>
+       
         <ScrollView
           style={styles.container}
           contentContainerStyle={styles.contentContainer}
           refreshControl={
-            <RefreshControl refreshing={!this.state.isReady} onRefresh={()=> {this.reLoad()}} />
-          }
+            <RefreshControl
+              refreshing={!this.state.isReady}
+              onRefresh={() => {
+                this.reLoad();
+              }}
+            />
+          } 
         >
+          <Text style={{ fontSize: 18 }}>Truyện hot khuyên đọc</Text>
           <View>
-            {data.map((
-              item,
-              index // cái này chắc k cần gt nhể =>>
-            ) => (
-              <NovelDetailComp key={index} item={item} />
-            ))}
+            <NovelDetailComp item={dataHot[0]} />
           </View>
+          <View style={styles.hotlist}>
+            {dataHot
+              .slice(1, dataHot.length > 5 ? 5 : dataHot.length)
+              .filter(item => item.Hot === "1")
+              .map((
+                item,
+                index // cái này chắc k cần gt nhể =>>
+              ) => (
+                <NovelPartialComp key={index} item={item} />
+              ))}
+          </View>
+          <Text style={{ fontSize: 21 ,fontWeight:'bold'}}>Nhiều người đọc</Text>
+          {lodash.orderBy(data.map((item)=> {return {...item,Viewer:parseInt(item.Viewer)}}),'Viewer','desc').map((item,index)=> <NovelDetailComp key={index} item={item} />)}
         </ScrollView>
-      </>
+      </View>
     );
   }
 }
