@@ -13,7 +13,7 @@ export default StyleSheet.create({
         textAlign: 'center',
       },
       contentContainer: {
-        paddingTop: 30,
+        paddingTop: 50,
       },
       welcomeContainer: {
         alignItems: 'center',
@@ -58,7 +58,7 @@ export default StyleSheet.create({
         marginTop: 5,
       },
       helpContainer: {
-        marginTop: 15,
+        marginTop: 25,
         alignItems: 'center',
       },
       helpLink: {
