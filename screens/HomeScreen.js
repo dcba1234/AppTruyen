@@ -1,8 +1,10 @@
-import * as WebBrowser from 'expo-web-browser';
-import { AppLoading } from 'expo';
-import * as Font from 'expo-font';
-import { Button } from '@ant-design/react-native'
-import React from 'react';
+import * as WebBrowser from "expo-web-browser";
+import { AppLoading } from "expo";
+import * as Font from "expo-font";
+import { Button } from "@ant-design/react-native";
+import { NovelDetailComp } from "./Component/NovelFull.js";
+import React from "react";
+import { NovelService } from "./Service/NovelService.js";
 import {
   Image,
   Platform,
@@ -11,28 +13,33 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from 'react-native';
-import styles from '../Css/HomeScreen'
-import { MonoText } from '../components/StyledText';
+  RefreshControl
+} from "react-native";
+import styles from "../Css/HomeScreen";
+import { MonoText } from "../components/StyledText";
 
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
+<<<<<<< HEAD
       
+=======
+>>>>>>> mobile
       <Home />
     </View>
   );
 }
 
 HomeScreen.navigationOptions = {
-  header: null,
+  header: null
 };
 
 class Home extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       isReady: false,
+<<<<<<< HEAD
       listNovel: [
         {
           Id: 1, Name: 'Yêu thần kí',
@@ -66,19 +73,23 @@ class Home extends React.Component {
         },
       ],// Ví dụ về 1 sách
     }
+=======
+      listNovel: [] // cái này xem trong log để xem kiểu dữ liệu
+    };
+
+>>>>>>> mobile
   }
+
   async componentDidMount() {
     await Font.loadAsync(
-      'antoutline',
-      // eslint-disable-next-line
-      require('../node_modules/@ant-design/icons-react-native/fonts/antoutline.ttf')
+      "antoutline",
+      require("../node_modules/@ant-design/icons-react-native/fonts/antoutline.ttf")
     );
-
     await Font.loadAsync(
-      'antfill',
-      // eslint-disable-next-line
-      require('../node_modules/@ant-design/icons-react-native/fonts/antfill.ttf')
+      "antfill",
+      require("../node_modules/@ant-design/icons-react-native/fonts/antfill.ttf")
     );
+<<<<<<< HEAD
     // eslint-disable-next-line
     this.setState({ isReady: true });
   }
@@ -130,14 +141,42 @@ class Home extends React.Component {
             </View>)}
         </View>
       </ScrollView>
+=======
 
+    let list = await NovelService.getAll();
+    this.setState({ isReady: true, listNovel: list });
+    console.log(list);
+  }
 
-    </>);
+  reLoad = async() => {
+    this.setState({isReady:false})
+    let list = await NovelService.getAll();
+    this.setState({isReady:true,listNovel: list})
+  }
+>>>>>>> mobile
+
+  render() {
+
+    const data = this.state ? this.state.listNovel : [];
+    return (
+      <>
+        <ScrollView
+          style={styles.container}
+          contentContainerStyle={styles.contentContainer}
+          refreshControl={
+            <RefreshControl refreshing={!this.state.isReady} onRefresh={()=> {this.reLoad()}} />
+          }
+        >
+          <View>
+            {data.map((
+              item,
+              index // cái này chắc k cần gt nhể =>>
+            ) => (
+              <NovelDetailComp key={index} item={item} />
+            ))}
+          </View>
+        </ScrollView>
+      </>
+    );
   }
 }
-
-
-
-
-
-
