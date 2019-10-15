@@ -20,7 +20,7 @@ export class NovelDetailComp extends React.Component {
   render() {
     if (!!!this.props.item) return <></>;
     return (
-      <TouchableOpacity>
+      <TouchableOpacity onPress={this.props.onClick}>
         <View style={styles.container} key={this.props.item.Id}>
           <View style={styles.left}>
             <Image

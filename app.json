@@ -10,8 +10,8 @@
       "web"
     ],
     "androidStatusBar": {
-      "barStyle": "light-content",
-      "backgroundColor": "#fffff"
+
+      "backgroundColor": "#ffffff"
     },
     "version": "1.0.0",
     "orientation": "portrait",

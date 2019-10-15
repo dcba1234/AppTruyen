@@ -13,6 +13,27 @@ export default StyleSheet.create({
       flexDirection:'row',
       justifyContent:'space-between'
     },
-
+    containerHeader: {
+      flexDirection: "row",
+      marginTop: 50,
+      marginLeft: 10,
+    },
+    left: {
+      width: "20%"
+    },
+    right: {
+      width: "70%",
+      marginLeft: 20
+    },
+    statusBox: {
+      justifyContent: "center",
+      marginTop: 25,
+      width: 50,
+      borderStyle: "solid",
+      borderWidth: 1,
+      height: 25,
+      borderColor: "#2ae8bf",
+      borderRadius: 5
+    }
 
 })
