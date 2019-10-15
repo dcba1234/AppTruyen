@@ -137,13 +137,19 @@ export default class NovelDetail extends React.Component {
             </View>
             <View>
               {this.state.listChap.map((item, index) => (
-                <TouchableOpacity key={index}>
-                <View style={{marginBottom:5,marginTop:5}} >
-                  <Text>{`Chương ${item.Chap}: ${item.Name}`}</Text>
-                </View>
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => {
+                    this.props.navigation.navigate("ChapDetail", {
+                      Chap: item
+                    });
+                  }}
+                >
+                  <View style={{ marginBottom: 5, marginTop: 5 }}>
+                    <Text>{`Chương ${item.Chap}: ${item.Name}`}</Text>
+                  </View>
                 </TouchableOpacity>
               ))}
-              
             </View>
           </View>
         </View>

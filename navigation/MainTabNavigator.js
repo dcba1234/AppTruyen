@@ -7,6 +7,7 @@ import {HomeScreen} from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import NovelDetail from '../screens/NovelDetail'
+import ChapDetail from '../screens/ChapDetail'
 import * as Font from "expo-font";
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -24,19 +25,14 @@ export const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
     Details: NovelDetail,
+    ChapDetail,
   },
   config
 );
 
-const NovelDetailStack = createStackNavigator(
-  {
-    Home: NovelDetail,
-  },
-  config
-);
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+  tabBarLabel: 'Trang chủ',
   tabBarIcon: ({ focused }) => (
     // <TabBarIcon
     //   focused={focused}
@@ -46,7 +42,7 @@ HomeStack.navigationOptions = {
     //       : 'md-information-circle'
     //   }
     // />
-    <Icon name="home" size="md" color="#2f95dc" />
+    <Icon name="home" size="md" color={focused? '#2f95dc' : '#ccc'} />
   ),
 };
 
@@ -60,11 +56,13 @@ const LinksStack = createStackNavigator(
 );
 
 LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
-  tabBarIcon: ({ focused }) => (
+  tabBarLabel: 'Thể loại',
+  tabBarIcon: ({ focused }) => {
+    return(
+    //#ccc #2f95dc<Icon type="" />
     
-    <Icon name="account-book" size="md" color="#2f95dc" />
-  ),
+    <Icon name="appstore" size="md" color={focused? '#2f95dc' : '#ccc'} />
+  )}
 };
 
 LinksStack.path = '';
@@ -77,9 +75,9 @@ const SettingsStack = createStackNavigator(
 );
 
 SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+  tabBarLabel: 'Thông tin',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+    <Icon name="info-circle" size="md" color={focused? '#2f95dc' : '#ccc'} />
   ),
 };
 

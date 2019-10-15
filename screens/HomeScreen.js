@@ -45,6 +45,8 @@ export class HomeScreen extends React.Component {
   reLoad = async () => {
     this.setState({ isReady: false });
     let list = await NovelService.getAll();
+    let json = require("./Local.json");
+    if (list.length == 0) list = json;
     this.setState({ isReady: true, listNovel: list });
   };
 
@@ -56,7 +58,7 @@ export class HomeScreen extends React.Component {
     return (
       <>
       <StatusBar translucent={true} backgroundColor="transparent" barStyle="dark-content" />
-      <View style={{ height: "100%",marginTop:15 }}>
+      <View style={{ height: "100%",marginTop:15,paddingBottom:17 }}>
         
         <ScrollView
           style={styles.container}
@@ -103,7 +105,7 @@ export class HomeScreen extends React.Component {
                 />
               ))}
           </View>
-          <Text style={{ fontSize: 21, fontWeight: "bold" }}>
+          <Text style={{ fontSize: 20,marginTop:10, fontWeight: "bold" }}>
             Nhiều người đọc
           </Text>
           {lodash
